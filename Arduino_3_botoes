@@ -1,0 +1,46 @@
+//Atividade com 3 botões
+//Débora Ester Da Silva Correia
+
+
+int LedPin = 4;//Pino para o Led
+
+int inPin1 = 9;//Pino de entrada do (interruptor 1)
+int inPin2 = 10;//Pino de entrada do (interruptor 2)
+int inPin3 = 11;//Pino de entrada do (interruptor 3)
+
+void setup()
+{
+  pinMode(LedPin, OUTPUT);
+ // Declaração do interruptor como entrada
+  pinMode(inPin1, INPUT);
+  pinMode(inPin2, INPUT);
+  pinMode(inPin3, INPUT);
+  
+  digitalWrite(LedPin, LOW);//Desligar a energia do ledpin
+}
+
+void loop()
+{
+  
+  
+  if(digitalRead(inPin1) == LOW)//fiz a verificação do led para ver se a entrada esta livre
+  {
+    digitalWrite(LedPin, HIGH);
+  }
+  else if(digitalRead(inPin2) == LOW && digitalRead(LedPin) == HIGH)
+  {
+    while(digitalRead(inPin3) != LOW && digitalRead(inPin1))
+    {
+      digitalWrite(LedPin, LOW);
+      delay(300);
+
+      digitalWrite(LedPin, HIGH); //ligar LedPin
+      delay(300);
+    }
+    
+  }
+  else if(digitalRead(inPin3) == LOW)
+  {
+    digitalWrite(LedPin, LOW); //Cortar a energia do LedPin
+  }
+}
